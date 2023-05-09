@@ -5,7 +5,7 @@ const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url, { useUnifiedTopology: true });
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('OurScene is on the way!');
 });
 
 app.use(express.json());
