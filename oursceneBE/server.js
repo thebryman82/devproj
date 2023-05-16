@@ -5,8 +5,12 @@ const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url, { useUnifiedTopology: true });
 
 app.get('/', (req, res) => {
-    res.send('OurScene is on the way!');
-});
+    if (!req.isAuthenticated()) {
+      res.redirect('/login');
+    } else {
+      res.send('OurScene is on the way!');
+    }
+  });
 
 app.use(express.json());
 
@@ -49,8 +53,8 @@ app.get('/api/data', async (req, res) => {
     const result = await collection.find().toArray();
     res.send(result);
   });
-  import React, { useState, useEffect } from 'react';
-  import { fetchData } from './api';
+  //import React, { useState, useEffect } from 'react';
+  //import { fetchData } from './api';
   
   const App = () => {
     const [data, setData] = useState([]);
@@ -61,19 +65,4 @@ app.get('/api/data', async (req, res) => {
         setData(response);
       };
       getData();
-    }, []);
-  
-    return (
-      <div>
-        <h1>Data:</h1>
-        <ul>
-          {data.map((item) => (
-            <li key={item._id}>{item.name}: {item.value}</li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
-  
-  export default App;
-  
+    }, []);}
